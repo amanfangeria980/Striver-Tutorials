@@ -223,6 +223,86 @@ void explainPriorityQueue(){
     pqm.push(2); // 1 2
     cout<<pqm.top()<<endl;
 
+
+    //push,pop -> O(logn)
+    //top -> O(1);
+}
+
+void explainSet(){
+    //it stores the elements in unique and sorted order
+    set<int>s;
+    s.insert(1); //{1}
+    s.insert(3); //{1,3}
+    s.emplace(3); //{1,3} it will not insert 2 as its already there in set and as it stores unique element so it will not store it again
+    s.insert(0); //{0,1,3}
+
+    auto it=s.find(3);  //it returns an iterator which points to three
+    auto it1=s.find(2); //now as element 2 is not in the set, the iterator will point to the s.end() (i.e., location after the last element in the set)
+
+    s.erase(3); //takes elements as an input and erases the element and it take O(logn) time
+    int counter=s.count(1); //returns 1 as the set s has one unique element 1
+    cout<<counter<<endl;
+    counter=s.count(5); //returns 0 as the set s doesn't have any element 5
+    cout<<counter<<endl;
+
+    //one more way to delete an element
+    it=s.find(3);
+    s.erase(it); //takes constant time or O(1) complexity
+    // we can also do this
+    // {1,2,3,4,5}
+    // auto it1=s.find(2);
+    // auto it2=s.find(4);
+    // s.erase(it1,it2); //[start,end)
+    //{1,4,5}
+
+    //also learn lower_bound and upper_bound
+    //everything in set happens in O(logn) complexity
+}
+void explainMultiSet(){
+    multiset<int>s;
+    //everything is similar to set difference being it also stores duplicate values
+    //it will also be sorted
+
+    //if we use erase function here then all the elements with same value will be deleted like this
+    //s.erase(1);
+
+    //but if we want to delete a particular index element,we can do this (i.e., first find the element using iterator and then delete it)
+    // auto it=s.find(1);
+    // s.erase(it);
+
+}
+
+void explainUnorderedSet(){
+    unordered_set<int> us;
+    //it stores unique element
+    //it doesn't store elements in sorted order
+    //all functions works except lower_bound() and upper_bound();
+    //mostly it has complexity of O(N);
+
+}
+
+void explainMap(){
+    map<int,int> m;
+    map<int,pair<int,int>> m1;
+    map<pair<int,int>,int> m2;
+    //it stores everything in respect to key value pairs
+    // roll and names are the best example roll can not be same it must be unique (key),
+    // but names can be same what we call as value
+    //map stores unique keys in sorted order
+    m[1]=2; //{1,2}
+    m.emplace(2,3);
+    m.insert({0,5});
+
+    for(auto it:m){
+        cout<<it.first<<" "<<it.second<<" ";
+    }cout<<endl;
+
+    cout<<m[0]<<endl;  // 5
+    m2[{1,2}]=5;
+    cout<<m2[{1,2}]<<endl;
+
+    auto it=m.find(2);
+    cout<<*(it).second;
 }
 int main()
 {
@@ -232,6 +312,10 @@ int main()
     // explainDeque();
     // explainStack();
     // explainQueue();
-    explainPriorityQueue();
+    // explainPriorityQueue();
+    // explainSet();
+    // explainMultiSet();
+    // explainUnorderedSet();
+    explainMap();
     return 0;
 }
